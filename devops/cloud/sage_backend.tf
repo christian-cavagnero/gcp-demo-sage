@@ -118,3 +118,10 @@ resource "google_project_iam_member" "sage_run_firestore" {
   role    = "roles/datastore.user"
   member  = "serviceAccount:${google_service_account.sage_run.email}"
 }
+
+# Permesso di leggere istruzioni.md dal bucket Cloud Storage
+resource "google_storage_bucket_iam_member" "sage_run_instructions_viewer" {
+  bucket = google_storage_bucket.sage_instructions.name
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${google_service_account.sage_run.email}"
+}
